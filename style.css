@@ -1,0 +1,395 @@
+/* ============================================================
+   Sejal Singh Rajput — Forensic Science Portfolio
+   Design system: "Case File"
+   ============================================================ */
+
+:root{
+  --ink:        #14181F;
+  --ink-soft:   #2A2F38;
+  --paper:      #ECE7D9;
+  --paper-dim:  #E1DACB;
+  --kraft:      #B8874F;
+  --luminol:    #4C7A6E;
+  --alert:      #A8452B;
+  --line:       rgba(20,24,31,0.16);
+  --line-light: rgba(236,231,217,0.22);
+
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --serif: 'Source Serif 4', Georgia, serif;
+
+  --max: 880px;
+  --pad: clamp(24px, 6vw, 64px);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+
+a{ color:inherit; }
+
+/* subtle paper grain */
+.grain{
+  position:fixed; inset:0; pointer-events:none; z-index:50;
+  opacity:0.05; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------------- Cover / Header ---------------- */
+.cover{
+  position:relative;
+  background:var(--ink);
+  color:var(--paper);
+  padding:0 0 clamp(40px,8vw,72px);
+  overflow:hidden;
+}
+
+.cover__tabs{
+  display:flex; gap:0;
+  border-bottom:1px solid var(--line-light);
+}
+.cover__tabs span{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.12em;
+  padding:10px var(--pad);
+  border-right:1px solid var(--line-light);
+  color:rgba(236,231,217,0.55);
+}
+.cover__tabs span:last-child{ border-right:none; }
+
+.cover__inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:clamp(40px,8vw,72px) var(--pad) 0;
+}
+
+.cover__meta{
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:28px;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.08em;
+  color:rgba(236,231,217,0.6);
+}
+.stamp{
+  border:1.5px solid var(--alert);
+  color:#E2846B;
+  padding:3px 10px;
+  border-radius:2px;
+  letter-spacing:0.15em;
+  transform:rotate(-2deg);
+  display:inline-block;
+}
+.cover__ref{ opacity:0.7; }
+
+.cover__name{
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:clamp(2.4rem, 7vw, 4.4rem);
+  line-height:1.04;
+  letter-spacing:-0.01em;
+  margin:0 0 22px;
+}
+
+.cover__role{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(1.1rem, 2.4vw, 1.4rem);
+  color:var(--kraft);
+  margin:0 0 18px;
+}
+
+.cover__objective{
+  max-width:52ch;
+  color:rgba(236,231,217,0.82);
+  font-size:1.02rem;
+  margin:0 0 34px;
+}
+
+.cover__contact{
+  font-family:var(--mono);
+  font-size:13px;
+  color:rgba(236,231,217,0.75);
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  padding-bottom:8px;
+}
+.cover__contact a{ text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s; }
+.cover__contact a:hover{ border-bottom-color:var(--luminol); color:#8FBBAE; }
+.cover__contact .dot{ opacity:0.4; }
+
+.cover__print{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:44px var(--pad) 4px;
+  display:flex; align-items:center; gap:18px;
+  color:rgba(236,231,217,0.5);
+}
+.print-svg{ width:74px; height:74px; flex:none; }
+.print-loops path{
+  stroke-dasharray:60;
+  stroke-dashoffset:60;
+  transition:stroke-dashoffset 1.4s ease;
+}
+.print-svg.developed .print-loops path{ stroke-dashoffset:0; }
+.print-loops path:nth-child(1){ transition-delay:0s; }
+.print-loops path:nth-child(2){ transition-delay:.08s; }
+.print-loops path:nth-child(3){ transition-delay:.16s; }
+.print-loops path:nth-child(4){ transition-delay:.24s; }
+.print-loops path:nth-child(5){ transition-delay:.32s; }
+.print-loops path:nth-child(6){ transition-delay:.4s; }
+.print-loops path:nth-child(7){ transition-delay:.46s; }
+.print-loops path:nth-child(8){ transition-delay:.5s; }
+.print-caption{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+
+/* ---------------- Sections ---------------- */
+.section{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:clamp(48px,8vw,80px) var(--pad);
+  border-bottom:1px solid var(--line);
+}
+.section--dark{
+  max-width:none;
+  background:var(--paper-dim);
+}
+.section--dark > .section__head,
+.section--dark > .docket,
+.section--dark > .exhibits,
+.section--dark > .seals{
+  max-width:var(--max);
+  margin-left:auto; margin-right:auto;
+}
+
+.section__head{
+  display:flex; align-items:baseline; gap:16px;
+  margin-bottom:36px;
+}
+.tag-number{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.12em;
+  color:var(--kraft);
+  border:1px solid var(--kraft);
+  padding:3px 9px;
+  border-radius:2px;
+  flex:none;
+}
+.section__head h2{
+  font-family:var(--serif);
+  font-size:clamp(1.5rem, 3vw, 2rem);
+  margin:0;
+  font-weight:600;
+}
+
+/* ---------------- Education docket ---------------- */
+.docket{ list-style:none; margin:0; padding:0; }
+.docket__row{
+  display:grid;
+  grid-template-columns:88px 1fr;
+  gap:20px;
+  padding:20px 0;
+  border-top:1px solid var(--line);
+}
+.docket__row:last-child{ border-bottom:1px solid var(--line); }
+.docket__date{
+  font-family:var(--mono);
+  font-size:14px;
+  color:var(--luminol);
+  font-weight:700;
+  padding-top:2px;
+}
+.docket__body h3{
+  margin:0 0 4px;
+  font-size:1.12rem;
+  font-weight:600;
+}
+.docket__body p{
+  margin:0;
+  color:var(--ink-soft);
+  font-size:0.98rem;
+}
+
+/* ---------------- Experience exhibits ---------------- */
+.exhibits{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+.exhibit-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:26px 24px;
+  position:relative;
+}
+.exhibit-card__label{
+  display:flex; justify-content:space-between;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.08em;
+  color:var(--kraft);
+  margin-bottom:14px;
+  text-transform:uppercase;
+}
+.exhibit-card h3{
+  margin:0 0 4px;
+  font-size:1.15rem;
+}
+.exhibit-card__sub{
+  font-family:var(--mono);
+  font-size:12.5px;
+  color:var(--luminol);
+  margin:0 0 12px;
+}
+.exhibit-card p:last-child{
+  margin:0;
+  color:var(--ink-soft);
+  font-size:0.96rem;
+}
+
+/* ---------------- Findings ---------------- */
+.findings{
+  display:grid;
+  gap:18px;
+}
+.finding{
+  padding:20px 0;
+  border-top:1px solid var(--line);
+}
+.finding:last-child{ border-bottom:1px solid var(--line); }
+.finding__kind{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--luminol);
+  margin-bottom:8px;
+}
+.finding--patent .finding__kind{ color:var(--alert); }
+.finding h3{
+  margin:0 0 6px;
+  font-size:1.08rem;
+  font-weight:600;
+  line-height:1.4;
+}
+.finding p{
+  margin:0;
+  color:var(--ink-soft);
+  font-size:0.96rem;
+  max-width:64ch;
+}
+
+/* ---------------- Seals / certifications ---------------- */
+.seals{
+  list-style:none; margin:0; padding:0;
+  display:grid; gap:14px;
+}
+.seals li{
+  display:flex; gap:12px; align-items:flex-start;
+  font-size:1rem;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+.seals li:last-child{ border-bottom:none; padding-bottom:0; }
+.seals__mark{
+  color:var(--kraft);
+  font-size:8px;
+  margin-top:8px;
+  flex:none;
+}
+
+/* ---------------- Toolkit ---------------- */
+.toolkit{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:32px;
+}
+.toolkit__col h3{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--kraft);
+  margin:0 0 14px;
+  font-weight:500;
+}
+.toolkit__col ul{
+  list-style:none; margin:0; padding:0;
+  display:grid; gap:9px;
+}
+.toolkit__col li{
+  font-size:0.98rem;
+  padding-left:16px;
+  position:relative;
+}
+.toolkit__col li::before{
+  content:'';
+  position:absolute; left:0; top:0.55em;
+  width:6px; height:1.5px;
+  background:var(--luminol);
+}
+
+/* ---------------- Footer / declaration ---------------- */
+.declaration{
+  background:var(--ink);
+  color:rgba(236,231,217,0.7);
+  padding:clamp(36px,7vw,56px) var(--pad);
+  text-align:center;
+}
+.declaration p{
+  font-family:var(--serif);
+  font-style:italic;
+  max-width:46ch;
+  margin:0 auto 20px;
+  font-size:0.98rem;
+}
+.declaration__sign{
+  display:flex; flex-direction:column; gap:4px;
+  align-items:center;
+  font-family:var(--mono);
+}
+.declaration__name{
+  font-size:1.1rem;
+  color:var(--paper);
+  letter-spacing:0.04em;
+}
+.declaration__sign a{
+  font-size:12.5px;
+  color:var(--luminol);
+  text-decoration:none;
+}
+.declaration__sign a:hover{ text-decoration:underline; }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width:720px){
+  .exhibits{ grid-template-columns:1fr; }
+  .toolkit{ grid-template-columns:1fr; gap:24px; }
+  .docket__row{ grid-template-columns:64px 1fr; }
+  .cover__tabs span{ padding:8px 14px; font-size:10px; }
+}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible{
+  outline:2px solid var(--luminol);
+  outline-offset:2px;
+}
